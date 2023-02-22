@@ -31,10 +31,12 @@ function tokenContractMaker(
   });
 }
 
-//Inputs from user
-const tokenName = "HelloWorld";
-const tokenSymbol = "HW";
-const tokenAmount = 112;
-const fileName = "scripts/contractTokenEmpty.txt";
+export default tokenContractMaker;
 
-tokenContractMaker(tokenName, tokenSymbol, tokenAmount, fileName);
+// //Inputs from user
+// const tokenName = "HelloToken";
+// const tokenSymbol = "HW";
+// const tokenAmount = 112;
+// const fileName = "scripts/contractTokenEmpty.txt";
+
+// tokenContractMaker(tokenName, tokenSymbol, tokenAmount, fileName);

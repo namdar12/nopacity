@@ -49,7 +49,7 @@ function contractOutput(
 }
 
 //Inputs that would come from the user
-const governorName = "HelloGovernor";
+const governorName = "HelloGovernor2";
 const timeInput = 1;
 const periodInput = "week";
 const time = convertTimeToSeconds(periodInput, timeInput);
