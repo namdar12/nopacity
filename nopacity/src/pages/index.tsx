@@ -3,6 +3,10 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import React from "react";
+import fs from "fs";
+import { run, ethers } from "hardhat";
+import path from "path";
+
 
 function handleClick() {
   fetch("/api/contractTokenMaker")
@@ -13,6 +17,51 @@ function handleClick() {
     .catch((error) => {
       // handle errors here
     });
+}
+
+function compileContractsClick() {
+  fetch("/api/deploy")
+    .then((response) => response.json())
+    .then((data) => {
+      // handle the data here
+    })
+    .catch((error) => {
+      // handle errors here
+    });
+  // //const fs = require("fs");
+  // // const path = require("path");
+  // // const { run, ethers } = require("hardhat");
+  // console.log("hERHE");
+  // async function compileContracts() {
+  //   console.log("HERE");
+  //   // Read the contract source files
+  //   const contractDir = path.join(__dirname, "contracts");
+  //   const files = fs.readdirSync(contractDir);
+
+  //   // Compile each contract separately
+  //   for (const file of files) {
+  //     const contractPath = path.join(contractDir, file);
+
+  //     // Run the Hardhat task to compile the contract
+  //     await run(`compile --contracts ${contractPath}`);
+
+  //     // Read the compiled artifact from the `artifacts` directory
+  //     const artifactPath = path.join(
+  //       __dirname,
+  //       "artifacts",
+  //       `${file.replace(".sol", "")}.json`
+  //     );
+  //     const artifactJson = fs.readFileSync(artifactPath);
+
+  //     // Parse the compiled contract artifact
+  //     const artifact = JSON.parse(artifactJson);
+
+  //     // Log the compiled contract
+  //     console.log(artifact);
+  //   }
+  //}
+
+  //compileContracts();
 }
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,6 +79,9 @@ export default function Home() {
         <div className={styles.description}>
           <button id="coolbutton" onClick={handleClick}>
             Click this button to make a .sol file
+          </button>
+          <button id="launch" onClick={compileContractsClick}>
+            Click this button to compile and launch a .sol file
           </button>
           <div>
             <a

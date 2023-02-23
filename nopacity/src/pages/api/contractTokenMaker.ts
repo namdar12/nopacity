@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
   output: string;
@@ -41,10 +41,10 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
   //const {input} = req.body;
-  const tokenName = "HelloToken5";
+  const tokenName = "HelloToken555";
   const tokenSymbol = "HW";
   const tokenAmount = 112;
   const fileName = "emptyContracts/contractTokenEmpty.txt";
-  tokenContractMaker(tokenName,tokenSymbol,tokenAmount,fileName)
-  res.status(200).json({ name: 'John Doe' })
+  tokenContractMaker(tokenName, tokenSymbol, tokenAmount, fileName);
+  res.status(200).json({ name: "John Doe" });
 }
