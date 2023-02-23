@@ -6,18 +6,36 @@ import React from "react";
 import fs from "fs";
 import { run, ethers } from "hardhat";
 import path from "path";
+import { useEffect, useState } from 'react';
 
 
-function handleClick() {
-  fetch("/api/contractTokenMaker")
-    .then((response) => response.json())
-    .then((data) => {
-      // handle the data here
+
+
+const handleClick = ((e : Event) => {
+  e.preventDefault();
+
+  const nameInput = document.querySelector('#name');
+  const emailInput = document.querySelector('#email');
+  const messageInput = document.querySelector('#message');
+
+  const data ={
+    name : nameInput.value,
+    email : emailInput.value,
+    message : messageInput.value
+  }
+  
+  console.log(nameInput.value)
+  console.log(emailInput.value)
+  console.log(messageInput.value)
+  fetch("/api/contractTokenMaker",{
+    method: 'POST',
+    headers:{
+      'Content-Type' : 'application/json',
+    },
+      body: JSON.stringify(data),
     })
-    .catch((error) => {
-      // handle errors here
-    });
-}
+
+  })
 
 function compileContractsClick() {
   fetch("/api/deploy")
@@ -28,45 +46,12 @@ function compileContractsClick() {
     .catch((error) => {
       // handle errors here
     });
-  // //const fs = require("fs");
-  // // const path = require("path");
-  // // const { run, ethers } = require("hardhat");
-  // console.log("hERHE");
-  // async function compileContracts() {
-  //   console.log("HERE");
-  //   // Read the contract source files
-  //   const contractDir = path.join(__dirname, "contracts");
-  //   const files = fs.readdirSync(contractDir);
-
-  //   // Compile each contract separately
-  //   for (const file of files) {
-  //     const contractPath = path.join(contractDir, file);
-
-  //     // Run the Hardhat task to compile the contract
-  //     await run(`compile --contracts ${contractPath}`);
-
-  //     // Read the compiled artifact from the `artifacts` directory
-  //     const artifactPath = path.join(
-  //       __dirname,
-  //       "artifacts",
-  //       `${file.replace(".sol", "")}.json`
-  //     );
-  //     const artifactJson = fs.readFileSync(artifactPath);
-
-  //     // Parse the compiled contract artifact
-  //     const artifact = JSON.parse(artifactJson);
-
-  //     // Log the compiled contract
-  //     console.log(artifact);
-  //   }
-  //}
-
-  //compileContracts();
 }
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+
   return (
     <>
       <Head>
@@ -77,110 +62,32 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
-          <button id="coolbutton" onClick={handleClick}>
+          {/* <button id="coolbutton" onClick={handleClick}>
             Click this button to make a .sol file
-          </button>
+          </button> */}
           <button id="launch" onClick={compileContractsClick}>
             Click this button to compile and launch a .sol file
           </button>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{" "}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
-          </div>
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
+          <label>Name:</label>
+          <input name="name"  id="name" />
+          <br></br>
+          <br></br>
+          <label>Email:</label>
+           <input name="email" id="email"/>
+          <br></br>
+          <br></br>
+          <label>Message:</label>
+          <input name="message" id="message" />
+          <br></br>
+          <br></br>
+          <button onClick={handleClick}>
+            Submit
+          </button>
+          {/* <input type="submit" value="handleSubmit" /> */}
         </div>
       </main>
     </>
   );
 }
+
+

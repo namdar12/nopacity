@@ -40,11 +40,16 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  //const {input} = req.body;
-  const tokenName = "HelloToken555";
-  const tokenSymbol = "HW";
-  const tokenAmount = 112;
-  const fileName = "emptyContracts/contractTokenEmpty.txt";
-  tokenContractMaker(tokenName, tokenSymbol, tokenAmount, fileName);
-  res.status(200).json({ name: "John Doe" });
+  const { name, email, message } = req.body;
+  console.log("HERE");
+  console.log("here " + name);
+  console.log(email);
+  console.log(message);
+
+  // const tokenName = "HelloToken555";
+  // const tokenSymbol = "HW";
+  // const tokenAmount = 112;
+  // const fileName = "emptyContracts/contractTokenEmpty.txt";
+  // tokenContractMaker(tokenName, tokenSymbol, tokenAmount, fileName);
+  // res.status(200).json({ name: "John Doe" });
 }
