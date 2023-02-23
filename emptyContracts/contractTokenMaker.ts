@@ -1,34 +1,29 @@
 import * as fs from "fs";
 
-function tokenContractMaker(
-  tokenName: string,
-  tokenSymbol: string,
-  tokenAmount: number,
-  fileName: string
-) {
-  fs.readFile(fileName, "utf8", (err, data) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
+function tokenContractMaker(tokenName: string, tokenSymbol: string, tokenAmount: number, fileName: string) {
+	fs.readFile(fileName, "utf8", (err, data) => {
+		if (err) {
+			console.error(err);
+			return;
+		}
 
-    const updatedData = data
-      .replace("${tokenName}", tokenName)
-      .replace('"${tokenName}"', `"${tokenName}"`)
-      .replace('"${tokenName}"', `"${tokenName}"`)
-      .replace('"${tokenSymbol}"', `"${tokenSymbol}"`)
-      .replace("${tokenAmount}", tokenAmount.toString());
+		const updatedData = data
+			.replace("${tokenName}", tokenName)
+			.replace('"${tokenName}"', `"${tokenName}"`)
+			.replace('"${tokenName}"', `"${tokenName}"`)
+			.replace('"${tokenSymbol}"', `"${tokenSymbol}"`)
+			.replace("${tokenAmount}", tokenAmount.toString());
 
-    const newFileName = `contracts/${tokenName}.sol`;
+		const newFileName = `contracts/${tokenName}.sol`;
 
-    fs.writeFile(newFileName, updatedData, "utf8", (err) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      console.log("File saved successfully!");
-    });
-  });
+		fs.writeFile(newFileName, updatedData, "utf8", (err) => {
+			if (err) {
+				console.error(err);
+				return;
+			}
+			console.log("File saved successfully!");
+		});
+	});
 }
 
 export default tokenContractMaker;
